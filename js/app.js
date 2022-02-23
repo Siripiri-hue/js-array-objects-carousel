@@ -1,64 +1,60 @@
-const elements = [
+const slides = [
     {
-        item: './img/01.jpg',
-        title: 'Svezia',
-        text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum corporis.'
+        photo: 'img/01.jpg',
+        country: 'Svezia',
+        caption: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis, magnam dolores dolorum corporis.'
     }, 
     {
-        item: './img/02.jpg',
-        title: 'Svizzera',
-        text: 'Lorem ipsum'
+        photo: 'img/02.jpg',
+        country: 'Svizzera',
+        caption: 'Lorem ipsum'
     },
     {
-        item: './img/03.jpg',
-        title: 'Gran Bretagna',
-        text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
+        photo: 'img/03.jpg',
+        country: 'Gran Bretagna',
+        caption: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
     },
     {
-        item: './img/04.jpg',
-        title: 'Germania',
-        text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
+        photo: 'img/04.jpg',
+        country: 'Germania',
+        caption: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     }, 
     {
-        item: './img/05.jpg',
-        title: 'Paradise',
-        text: 'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,'
+        photo: 'img/05.jpg',
+        country: 'Paradise',
+        caption: 'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,'
     }
-]
+];
 
-    
+// console.log(slides);
 
 const imgWrapper = document.getElementById("img-wrapper");
 const miniatures = document.getElementById("miniatures");
 
-for (let i = 0; i < items.length; i++)
-{
+slides.forEach((element) => {
+
     const bigImg = document.createElement("div");
     bigImg.classList.add("img-lg");
     imgWrapper.appendChild(bigImg);
 
-    const lilImg = document.createElement("div");
-    lilImg.classList.add("lil-img");
-    miniatures.appendChild(lilImg);
+    let newItem = `
+    <img src="${element.photo}">
+    <div class="info">
+        <h1 class="title">${element.country}</h1>
+        <p class="caption">${element.caption}</p>
+    </div>
+    `;
 
-    const big = document.createElement("img");
-    const img = document.createElement("img");
-    big.src = img.src = items[i];
-    bigImg.append(big);
-    lilImg.append(img);
+    bigImg.innerHTML += newItem;
 
-    const info = document.createElement("div");
-    const country = document.createElement ("h1");
-    const caption = document.createElement("span");
-    bigImg.appendChild(info);
-    info.appendChild(country);
-    info.appendChild(caption);
-    info.classList.add("info");
-    country.classList.add("title");
-    caption.classList.add("caption");
-    country.innerText = title[i];
-    caption.innerText = text[i];
-}
+    const littleImg = document.createElement("div");
+    littleImg.classList.add("lil-img");
+    miniatures.appendChild(littleImg);
+
+    let newMiniatureItem = `<img src="${element.photo}">`;
+
+    littleImg.innerHTML += newMiniatureItem;
+});
 
 let activeElement = 2;
 const images = document.getElementsByClassName("img-lg");
@@ -92,3 +88,5 @@ down.addEventListener("click", function()
     images[activeElement].classList.add("active");
     miniImg[activeElement].classList.add("active-xs");
 });
+  
+
